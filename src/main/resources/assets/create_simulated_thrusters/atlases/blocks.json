@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "create_simulated_thrusters:block/redstone_thruster_thrust"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "parent": "create_simulated_thrusters:block/redstone_thruster/redstone_thruster_unpowered",
+  "parent": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered",
   "display": {
     "thirdperson_righthand": {
       "rotation": [75, 45, 0],
@@ -24,7 +24,7 @@
     "gui": {
       "rotation": [30, 225, 0],
       "translation": [0, 0, 0],
-      "scale": [0.625, 0.625, 0.625]
+      "scale": [0.5, 0.5, 0.5]
     },
     "ground": {
       "translation": [0, 3, 0],

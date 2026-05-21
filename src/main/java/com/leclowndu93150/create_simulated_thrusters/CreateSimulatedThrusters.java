@@ -1,7 +1,10 @@
 package com.leclowndu93150.create_simulated_thrusters;
 
+import com.leclowndu93150.create_simulated_thrusters.content.thruster.BlazeThrusterBlock;
+import com.leclowndu93150.create_simulated_thrusters.content.thruster.BlazeThrusterBlockEntity;
 import com.leclowndu93150.create_simulated_thrusters.content.thruster.RedstoneThrusterBlock;
 import com.leclowndu93150.create_simulated_thrusters.content.thruster.RedstoneThrusterBlockEntity;
+import com.leclowndu93150.create_simulated_thrusters.particle.ThrusterParticleTypes;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -50,6 +53,22 @@ public class CreateSimulatedThrusters {
             .validBlocks(REDSTONE_THRUSTER)
             .register();
 
+    public static final BlockEntry<BlazeThrusterBlock> BLAZE_THRUSTER =
+            REGISTRATE.block("blaze_thruster", BlazeThrusterBlock::new)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> p.sound(SoundType.METAL).noOcclusion())
+                    .transform(axeOrPickaxe())
+                    .blockstate((ctx, prov) -> {})
+                    .item()
+                    .model((ctx, prov) -> {})
+                    .build()
+                    .register();
+
+    public static final BlockEntityEntry<BlazeThrusterBlockEntity> BLAZE_THRUSTER_BE = REGISTRATE
+            .blockEntity("blaze_thruster", BlazeThrusterBlockEntity::new)
+            .validBlocks(BLAZE_THRUSTER)
+            .register();
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -65,11 +84,14 @@ public class CreateSimulatedThrusters {
     public CreateSimulatedThrusters(IEventBus modEventBus, ModContainer modContainer) {
         REGISTRATE.registerEventListeners(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+        ThrusterParticleTypes.REGISTER.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> BlockStressValues.IMPACTS.register(REDSTONE_THRUSTER.get(), () -> 6.0));
+        event.enqueueWork(() -> {
+            BlockStressValues.IMPACTS.register(REDSTONE_THRUSTER.get(), () -> 6.0);
+        });
     }
 }

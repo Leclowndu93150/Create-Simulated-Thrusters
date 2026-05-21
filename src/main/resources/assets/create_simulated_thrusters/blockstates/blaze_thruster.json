@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=south,heat=none": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered" },
+    "facing=north,heat=none": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered", "y": 180 },
+    "facing=east,heat=none":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered", "y": 270 },
+    "facing=west,heat=none":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered", "y": 90 },
+    "facing=up,heat=none":    { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered", "x": 90 },
+    "facing=down,heat=none":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_unpowered", "x": 270 },
+
+    "facing=south,heat=low": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low" },
+    "facing=north,heat=low": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low", "y": 180 },
+    "facing=east,heat=low":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low", "y": 270 },
+    "facing=west,heat=low":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low", "y": 90 },
+    "facing=up,heat=low":    { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low", "x": 90 },
+    "facing=down,heat=low":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_low", "x": 270 },
+
+    "facing=south,heat=high": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high" },
+    "facing=north,heat=high": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high", "y": 180 },
+    "facing=east,heat=high":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high", "y": 270 },
+    "facing=west,heat=high":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high", "y": 90 },
+    "facing=up,heat=high":    { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high", "x": 90 },
+    "facing=down,heat=high":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_high", "x": 270 },
+
+    "facing=south,heat=blue": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue" },
+    "facing=north,heat=blue": { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue", "y": 180 },
+    "facing=east,heat=blue":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue", "y": 270 },
+    "facing=west,heat=blue":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue", "y": 90 },
+    "facing=up,heat=blue":    { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue", "x": 90 },
+    "facing=down,heat=blue":  { "model": "create_simulated_thrusters:block/blaze_thruster/blaze_thruster_blue", "x": 270 }
+  }
+}

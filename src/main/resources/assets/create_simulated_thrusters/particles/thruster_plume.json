@@ -1,0 +1,16 @@
+{
+    "textures": [
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_0",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_1",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_2",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_3",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_4",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_5",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_6",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_7",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_8",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_9",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_10",
+        "create_simulated_thrusters:thrust_smoke/big_thrust_smoke_11"
+    ]
+}

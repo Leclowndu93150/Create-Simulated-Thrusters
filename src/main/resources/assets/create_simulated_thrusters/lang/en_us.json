@@ -1,13 +1,21 @@
 {
   "itemGroup.create_simulated_thrusters": "Create Simulated Thrusters",
   "block.create_simulated_thrusters.redstone_thruster": "Redstone Thruster",
+  "block.create_simulated_thrusters.blaze_thruster": "Blaze Thruster",
   "create_simulated_thrusters.gui.goggles.redstone_thruster": "Redstone Thruster",
+  "create_simulated_thrusters.gui.goggles.blaze_thruster": "Blaze Thruster",
   "create_simulated_thrusters.gui.goggles.status": "Status",
   "create_simulated_thrusters.gui.goggles.status.working": "Working",
   "create_simulated_thrusters.gui.goggles.status.not_powered": "No Redstone Signal",
   "create_simulated_thrusters.gui.goggles.status.not_rotating": "Not Rotating",
   "create_simulated_thrusters.gui.goggles.status.overstressed": "Overstressed",
+  "create_simulated_thrusters.gui.goggles.status.no_fuel": "No Fuel",
   "create_simulated_thrusters.gui.goggles.redstone_power": "Redstone Power",
+  "create_simulated_thrusters.gui.goggles.fuel_type": "Fuel Type",
+  "create_simulated_thrusters.gui.goggles.fuel_type.low": "Low Grade",
+  "create_simulated_thrusters.gui.goggles.fuel_type.high": "Standard",
+  "create_simulated_thrusters.gui.goggles.fuel_type.blue": "Superheated",
+  "create_simulated_thrusters.gui.goggles.fuel_remaining": "Fuel Remaining",
   "create_simulated_thrusters.gui.goggles.thrust": "Thrust",
   "create_simulated_thrusters.gui.goggles.airflow": "Airflow"
 }

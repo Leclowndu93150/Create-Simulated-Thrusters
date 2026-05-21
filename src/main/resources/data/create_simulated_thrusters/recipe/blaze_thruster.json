@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "I I",
+    "ABA"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "simulated:engine_assembly"
+    },
+    "B": {
+      "item": "create:blaze_burner"
+    }
+  },
+  "result": {
+    "id": "create_simulated_thrusters:blaze_thruster",
+    "count": 1
+  }
+}

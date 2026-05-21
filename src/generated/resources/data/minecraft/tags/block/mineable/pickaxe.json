@@ -1,5 +1,6 @@
 {
   "values": [
-    "create_simulated_thrusters:redstone_thruster"
+    "create_simulated_thrusters:redstone_thruster",
+    "create_simulated_thrusters:blaze_thruster"
   ]
 }

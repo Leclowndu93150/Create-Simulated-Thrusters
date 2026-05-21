@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "EDE",
+    "RSR"
+  ],
+  "key": {
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "D": {
+      "item": "minecraft:dropper"
+    },
+    "R": {
+      "item": "minecraft:repeater"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "result": {
+    "id": "create_simulated_thrusters:redstone_thruster",
+    "count": 1
+  }
+}

@@ -129,7 +129,7 @@ public class RedstoneThrusterBlockEntity extends KineticBlockEntity implements B
                         .withStyle(ChatFormatting.GRAY))
                 .text(ChatFormatting.GRAY, ": ")
                 .add(CreateLang.number(this.getCurrentThrust())
-                        .text(" pN")
+                        .text(" N")
                         .style(ChatFormatting.AQUA))
                 .forGoggles(tooltip, 1);
 

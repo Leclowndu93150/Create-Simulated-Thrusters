@@ -1,0 +1,4 @@
+# Made in Blockbench 4.12.6
+newmtl m_0733762f-288a-b25b-31ae-d546bb315e68
+map_Kd create_simulated_thrusters:block/brass_thruster/brass_thruster
+newmtl none

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "create_simulated_thrusters:blaze_thruster"
+          "name": "create_simulated_thrusters:brass_thruster"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "create_simulated_thrusters:blocks/blaze_thruster"
+  "random_sequence": "create_simulated_thrusters:blocks/brass_thruster_part"
 }

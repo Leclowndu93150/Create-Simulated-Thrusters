@@ -56,6 +56,12 @@ public class BlazeThrusterBlock extends DirectionalBlock implements IBE<BlazeThr
     }
 
     @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof BlazeThrusterBlockEntity be)
+            be.updateRedstonePaused();
+    }
+
+    @Override
     public Class<BlazeThrusterBlockEntity> getBlockEntityClass() {
         return BlazeThrusterBlockEntity.class;
     }

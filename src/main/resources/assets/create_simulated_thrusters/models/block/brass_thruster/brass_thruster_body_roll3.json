@@ -1,0 +1,6 @@
+{
+  "loader": "neoforge:obj",
+  "model": "create_simulated_thrusters:models/block/brass_thruster/brass_thruster_roll3.obj",
+  "flip_v": true,
+  "automatic_culling": false
+}

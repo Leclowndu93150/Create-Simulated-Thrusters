@@ -47,10 +47,7 @@ public class RedstoneThrusterBlockEntity extends KineticBlockEntity implements B
     }
 
     public double getCurrentAirflow() {
-        if (!this.isOperational()) {
-            return 0.0d;
-        }
-        return Config.redstoneThrusterAirflow * this.getThrottle() * this.getSpeedScale();
+        return 0.0d;
     }
 
     public boolean isOperational() {
@@ -125,22 +122,36 @@ public class RedstoneThrusterBlockEntity extends KineticBlockEntity implements B
                 .forGoggles(tooltip, 1);
 
         CreateLang.builder()
+                .add(Component.translatable("create_simulated_thrusters.gui.goggles.rpm")
+                        .withStyle(ChatFormatting.GRAY))
+                .text(ChatFormatting.GRAY, ": ")
+                .add(CreateLang.number(this.getRpm()).style(ChatFormatting.AQUA))
+                .text(ChatFormatting.DARK_GRAY, " / " + (int) Config.redstoneThrusterMaxThrustRpm)
+                .forGoggles(tooltip, 1);
+
+        CreateLang.builder()
                 .add(Component.translatable("create_simulated_thrusters.gui.goggles.thrust")
                         .withStyle(ChatFormatting.GRAY))
                 .text(ChatFormatting.GRAY, ": ")
                 .add(CreateLang.number(this.getCurrentThrust())
                         .text(" N")
                         .style(ChatFormatting.AQUA))
+                .text(ChatFormatting.DARK_GRAY, " / ")
+                .add(CreateLang.number(Config.redstoneThrusterThrust)
+                        .text(" N")
+                        .style(ChatFormatting.DARK_GRAY))
                 .forGoggles(tooltip, 1);
 
-        CreateLang.builder()
-                .add(Component.translatable("create_simulated_thrusters.gui.goggles.airflow")
-                        .withStyle(ChatFormatting.GRAY))
-                .text(ChatFormatting.GRAY, ": ")
-                .add(CreateLang.number(this.getCurrentAirflow())
-                        .text(" m/s")
-                        .style(ChatFormatting.AQUA))
-                .forGoggles(tooltip, 1);
+        if (Config.redstoneThrusterAirflow > 0) {
+            CreateLang.builder()
+                    .add(Component.translatable("create_simulated_thrusters.gui.goggles.airflow")
+                            .withStyle(ChatFormatting.GRAY))
+                    .text(ChatFormatting.GRAY, ": ")
+                    .add(CreateLang.number(this.getCurrentAirflow())
+                            .text(" m/s")
+                            .style(ChatFormatting.AQUA))
+                    .forGoggles(tooltip, 1);
+        }
 
         return true;
     }

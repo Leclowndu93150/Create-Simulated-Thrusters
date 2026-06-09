@@ -47,6 +47,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
     private int remainingBurnTicks;
     private HeatLevel heatLevel;
     private boolean creative;
+    private boolean redstonePaused;
 
     public BlazeThrusterBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -54,6 +55,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
         remainingBurnTicks = 0;
         heatLevel = HeatLevel.NONE;
         creative = false;
+        redstonePaused = false;
     }
 
     @Override
@@ -83,6 +85,10 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
         super.tick();
         if (level.isClientSide)
             return;
+        updateRedstonePaused();
+        if (isRedstonePaused())
+            return;
+
         if (getCurrentThrust() > 0)
             spawnParticles();
 
@@ -213,7 +219,23 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
     }
 
     public double getCurrentThrust() {
+        if (isRedstonePaused())
+            return 0;
         return (creative || remainingBurnTicks > 0) ? thrustPerTick : 0;
+    }
+
+    public boolean isRedstonePaused() {
+        return redstonePaused;
+    }
+
+    public void updateRedstonePaused() {
+        if (level == null || level.isClientSide)
+            return;
+        boolean paused = Config.blazeThrusterRedstoneControl && level.hasNeighborSignal(worldPosition);
+        if (redstonePaused == paused)
+            return;
+        redstonePaused = paused;
+        notifyUpdate();
     }
 
     public HeatLevel getHeatLevel() {
@@ -254,7 +276,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
 
         boolean active = creative || remainingBurnTicks > 0;
         ChatFormatting statusColor = active ? ChatFormatting.GREEN : ChatFormatting.RED;
-        String statusKey = active ? "working" : "no_fuel";
+        String statusKey = isRedstonePaused() ? "redstone_paused" : active ? "working" : "no_fuel";
 
         CreateLang.builder()
                 .add(Component.translatable("create_simulated_thrusters.gui.goggles.status")
@@ -290,6 +312,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
                             : CreateLang.number(remainingBurnTicks / 20.0).text(" s").style(ChatFormatting.GREEN).component())
                     .forGoggles(tooltip, 1);
 
+            double maxThrust = computeThrust(heatLevel);
             CreateLang.builder()
                     .add(Component.translatable("create_simulated_thrusters.gui.goggles.thrust")
                             .withStyle(ChatFormatting.GRAY))
@@ -297,6 +320,10 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
                     .add(CreateLang.number(getCurrentThrust())
                             .text(" N")
                             .style(ChatFormatting.AQUA))
+                    .text(ChatFormatting.DARK_GRAY, " / ")
+                    .add(CreateLang.number(maxThrust)
+                            .text(" N")
+                            .style(ChatFormatting.DARK_GRAY))
                     .forGoggles(tooltip, 1);
         }
 
@@ -309,6 +336,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
         tag.putInt("remainingBurnTicks", remainingBurnTicks);
         tag.putInt("heatLevel", heatLevel.ordinal());
         tag.putBoolean("creative", creative);
+        tag.putBoolean("redstonePaused", redstonePaused);
         super.write(tag, registries, clientPacket);
     }
 
@@ -319,6 +347,7 @@ public class BlazeThrusterBlockEntity extends SmartBlockEntity implements BlockE
         int ord = tag.getInt("heatLevel");
         heatLevel = HeatLevel.values()[Math.min(ord, HeatLevel.values().length - 1)];
         creative = tag.getBoolean("creative");
+        redstonePaused = tag.getBoolean("redstonePaused");
         super.read(tag, registries, clientPacket);
     }
 }

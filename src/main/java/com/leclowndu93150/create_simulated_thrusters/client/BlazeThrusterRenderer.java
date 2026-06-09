@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -37,6 +37,9 @@ public class BlazeThrusterRenderer implements BlockEntityRenderer<BlazeThrusterB
     @Override
     public void render(BlazeThrusterBlockEntity be, float partialTicks, PoseStack poseStack,
             MultiBufferSource buffer, int light, int overlay) {
+        if (be.isRedstonePaused())
+            return;
+
         BlockState state = be.getBlockState();
         HeatLevel heat = state.getValue(BlazeThrusterBlock.HEAT_LEVEL);
         if (!heat.isActive())
@@ -62,7 +65,7 @@ public class BlazeThrusterRenderer implements BlockEntityRenderer<BlazeThrusterB
         Direction facing = be.getFacing();
         Direction exhaust = facing.getOpposite();
 
-        renderPlume(poseStack, buffer.getBuffer(Sheets.cutoutBlockSheet()), sprite, exhaust, plumeLength, LightTexture.FULL_BRIGHT, overlay);
+        renderPlume(poseStack, buffer.getBuffer(RenderType.entityCutoutNoCull(TextureAtlas.LOCATION_BLOCKS)), sprite, exhaust, plumeLength, LightTexture.FULL_BRIGHT, overlay);
     }
 
     private void renderPlume(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
@@ -86,15 +89,15 @@ public class BlazeThrusterRenderer implements BlockEntityRenderer<BlazeThrusterB
         Vector3f c = point(origin, dir, right, up, length,  rightOffset, upMax);
         Vector3f d = point(origin, dir, right, up, length,  rightOffset, upMin);
 
-        vertex(consumer, pose, sprite, a, 1f, 0f, light, overlay);
-        vertex(consumer, pose, sprite, b, 1f, 1f, light, overlay);
-        vertex(consumer, pose, sprite, c, 0f, 1f, light, overlay);
-        vertex(consumer, pose, sprite, d, 0f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, a, 1f, 1f, light, overlay);
+        vertex(consumer, pose, sprite, b, 1f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, c, 0f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, d, 0f, 1f, light, overlay);
 
-        vertex(consumer, pose, sprite, d, 0f, 0f, light, overlay);
-        vertex(consumer, pose, sprite, c, 0f, 1f, light, overlay);
-        vertex(consumer, pose, sprite, b, 1f, 1f, light, overlay);
-        vertex(consumer, pose, sprite, a, 1f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, d, 0f, 1f, light, overlay);
+        vertex(consumer, pose, sprite, c, 0f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, b, 1f, 0f, light, overlay);
+        vertex(consumer, pose, sprite, a, 1f, 1f, light, overlay);
     }
 
     private void vertex(VertexConsumer consumer, PoseStack.Pose pose, TextureAtlasSprite sprite,

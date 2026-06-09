@@ -1,0 +1,8 @@
+{
+  "values": [
+    "create_simulated_thrusters:redstone_thruster",
+    "create_simulated_thrusters:blaze_thruster",
+    "create_simulated_thrusters:brass_thruster",
+    "create_simulated_thrusters:brass_thruster_part"
+  ]
+}

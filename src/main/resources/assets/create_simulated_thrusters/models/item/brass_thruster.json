@@ -1,0 +1,39 @@
+{
+  "parent": "create_simulated_thrusters:block/brass_thruster/brass_thruster_body",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.125, 0.125, 0.125]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.125, 0.125, 0.125]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.18, 0.18, 0.18]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.08, 0.08, 0.08]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.18, 0.18, 0.18]
+    }
+  }
+}

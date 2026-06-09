@@ -6,6 +6,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
@@ -19,6 +20,9 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
     private static final int   PLUME_BASE_LIFETIME = 40;
     private static final int   BLUE_PLUME_SPRITES  = 6;
     private static final float WHITE_TINT_TARGET    = 1.0f;
+    private static final float HOT_TINT_R           = 1.0f;
+    private static final float HOT_TINT_G           = 0.68f;
+    private static final float HOT_TINT_B           = 0.28f;
     private static final float SMOKE_SPREAD_MAG    = 0.0f;
     private static final float SMOKE_FRICTION      = 0.96f;
     private static final float SMOKE_BASE_LIFT     = 0.0f;
@@ -45,13 +49,14 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
 
     protected ThrusterPlumeParticle(ClientLevel level, double x, double y, double z,
                                     double dxIn, double dyIn, double dzIn,
-                                    SpriteSet sprites, Vector3f color, boolean isBlue, float sizeScale) {
+                                    SpriteSet sprites, Vector3f color, boolean isBlue, float sizeScale, float lengthScale) {
         super(level, x, y, z, sprites, 0);
         this.spriteSet = sprites;
         this.isBlue = isBlue;
         this.quadSize *= PLUME_QUAD_SIZE * sizeScale;
         this.baseSize = this.quadSize;
-        this.lifetime = isBlue ? 24 + random.nextInt(4) : PLUME_BASE_LIFETIME + random.nextInt(5);
+        int baseLife = isBlue ? 24 + random.nextInt(4) : PLUME_BASE_LIFETIME + random.nextInt(5);
+        this.lifetime = Math.max(2, Math.round(baseLife * Mth.clamp(lengthScale, 0.05f, 1.0f)));
         this.friction = PLUME_FRICTION;
         this.dx = dxIn + spread();
         this.dy = dyIn + spread();
@@ -66,7 +71,8 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
         double angle = random.nextDouble() * 2.0 * Math.PI;
         this.spreadDirection = u.scale(Math.cos(angle)).add(v.scale(Math.sin(angle)));
         this.spreadMagnitude = 0.1f + random.nextFloat() * 0.7f;
-        this.smokeTransitionAge = BASE_SMOKE_TRANS + random.nextIntBetweenInclusive(-2, 2);
+        int baseTransition = BASE_SMOKE_TRANS + random.nextIntBetweenInclusive(-2, 2);
+        this.smokeTransitionAge = Math.max(1, Math.round(baseTransition * Mth.clamp(lengthScale, 0.05f, 1.0f)));
         this.smokeLift = isBlue ? 0.0f : SMOKE_BASE_LIFT;
 
         this.startR = color.x();
@@ -146,6 +152,11 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
             setColor(Mth.lerp(whiteProgress, this.startR, WHITE_TINT_TARGET),
                      Mth.lerp(whiteProgress, this.startG, WHITE_TINT_TARGET),
                      Mth.lerp(whiteProgress, this.startB, WHITE_TINT_TARGET));
+        } else {
+            float hotProgress = Mth.clamp((float) this.age / this.smokeTransitionAge, 0.0f, 1.0f);
+            setColor(Mth.lerp(hotProgress, this.startR, HOT_TINT_R),
+                     Mth.lerp(hotProgress, this.startG, HOT_TINT_G),
+                     Mth.lerp(hotProgress, this.startB, HOT_TINT_B));
         }
 
         float pct = (float) this.age / this.lifetime;
@@ -195,6 +206,11 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
 
+    @Override
+    public int getLightColor(float partialTick) {
+        return LightTexture.FULL_BRIGHT;
+    }
+
     public static class Factory implements ParticleProvider<ThrusterPlumeParticleData> {
         private final SpriteSet sprites;
 
@@ -205,7 +221,7 @@ public class ThrusterPlumeParticle extends SimpleAnimatedParticle {
         @Override
         public Particle createParticle(ThrusterPlumeParticleData data, ClientLevel level,
                 double x, double y, double z, double dx, double dy, double dz) {
-            return new ThrusterPlumeParticle(level, x, y, z, dx, dy, dz, sprites, data.getColor(), data.isBlue(), data.getSizeScale());
+            return new ThrusterPlumeParticle(level, x, y, z, dx, dy, dz, sprites, data.getColor(), data.isBlue(), data.getSizeScale(), data.getLengthScale());
         }
     }
 }

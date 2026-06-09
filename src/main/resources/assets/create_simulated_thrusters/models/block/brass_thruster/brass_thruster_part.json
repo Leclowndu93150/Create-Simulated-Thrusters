@@ -1,0 +1,6 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "create_simulated_thrusters:block/brass_thruster/brass_thruster"
+  }
+}

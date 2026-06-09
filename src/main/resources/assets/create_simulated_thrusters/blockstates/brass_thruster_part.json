@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"},
+    "facing=south": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"},
+    "facing=east": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"},
+    "facing=west": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"},
+    "facing=up": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"},
+    "facing=down": {"model": "create_simulated_thrusters:block/brass_thruster/brass_thruster_part"}
+  }
+}

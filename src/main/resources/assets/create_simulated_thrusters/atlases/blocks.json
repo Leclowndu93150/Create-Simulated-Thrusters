@@ -27,6 +27,14 @@
     {
       "type": "single",
       "resource": "create_simulated_thrusters:block/blaze_thrust_blue_2"
+    },
+    {
+      "type": "single",
+      "resource": "create_simulated_thrusters:block/brass_thruster/brass_thruster_thrust_mid"
+    },
+    {
+      "type": "single",
+      "resource": "create_simulated_thrusters:block/brass_thruster/brass_thruster_thrust_high"
     }
   ]
 }
